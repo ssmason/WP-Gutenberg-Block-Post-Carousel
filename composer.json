@@ -1,5 +1,5 @@
 {
-    "name": "satori-digital/satori-post-carousel",
+    "name": "ssmason/wp-gutenberg-block-post-carousel",
     "description": "An accessible, configurable Gutenberg block carousel for any public post type.",
     "type": "wordpress-plugin",
     "license": "GPL-2.0-or-later",
