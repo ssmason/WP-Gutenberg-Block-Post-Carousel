@@ -1,0 +1,24 @@
+{
+    "name": "satori-digital/satori-post-carousel",
+    "description": "An accessible, configurable Gutenberg block carousel for any public post type.",
+    "type": "wordpress-plugin",
+    "license": "GPL-2.0-or-later",
+    "authors": [
+        {
+            "name": "Steve Mason",
+            "email": "steve@satori.digital",
+            "homepage": "https://satori.digital"
+        }
+    ],
+    "require": {
+        "php": ">=8.2"
+    },
+    "autoload": {
+        "classmap": [
+            "includes/"
+        ]
+    },
+    "extra": {
+        "installer-name": "satori-post-carousel"
+    }
+}
