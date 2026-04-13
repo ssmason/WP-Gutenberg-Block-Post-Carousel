@@ -34,9 +34,9 @@ export default function Edit( { attributes, setAttributes } ) {
 		postType,
 		postsPerPage,
 		autoplayInterval,
-		showDots,
-		showNavButtons,
-		showPauseButton,
+		hideDots,
+		hideNavButtons,
+		hidePauseButton,
 	} = attributes;
 
 	const blockProps = useBlockProps( {
@@ -96,31 +96,31 @@ export default function Edit( { attributes, setAttributes } ) {
 				<PanelBody title={ __( 'Controls', 'satori-post-carousel' ) }>
 					<ToggleControl
 						label={ __(
-							'Show prev / next',
+							'Hide prev / next',
 							'satori-post-carousel'
 						) }
-						checked={ showNavButtons }
+						checked={ hideNavButtons }
 						onChange={ ( value ) =>
-							setAttributes( { showNavButtons: value } )
+							setAttributes( { hideNavButtons: value } )
 						}
 						__nextHasNoMarginBottom
 					/>
 					<ToggleControl
-						label={ __( 'Show dots', 'satori-post-carousel' ) }
-						checked={ showDots }
+						label={ __( 'Hide dots', 'satori-post-carousel' ) }
+						checked={ hideDots }
 						onChange={ ( value ) =>
-							setAttributes( { showDots: value } )
+							setAttributes( { hideDots: value } )
 						}
 						__nextHasNoMarginBottom
 					/>
 					<ToggleControl
 						label={ __(
-							'Show pause / play',
+							'Hide pause / play',
 							'satori-post-carousel'
 						) }
-						checked={ showPauseButton }
+						checked={ hidePauseButton }
 						onChange={ ( value ) =>
-							setAttributes( { showPauseButton: value } )
+							setAttributes( { hidePauseButton: value } )
 						}
 						__nextHasNoMarginBottom
 					/>

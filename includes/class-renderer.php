@@ -111,12 +111,12 @@ class Renderer {
 		<?php endforeach; ?>
 	</div>
 
-		<?php if ( $total > 1 && ( $attrs['show_nav_buttons'] || $attrs['show_dots'] || $attrs['show_pause_button'] ) ) : ?>
+		<?php if ( $total > 1 && ( ! $attrs['hide_nav_buttons'] || ! $attrs['hide_dots'] || ! $attrs['hide_pause_button'] ) ) : ?>
 	<nav
 		class="satori-post-carousel__nav"
 		aria-label="<?php echo $nav_label; // phpcs:ignore WordPress.Security.EscapeOutput ?>"
 	>
-			<?php if ( $attrs['show_nav_buttons'] ) : ?>
+			<?php if ( ! $attrs['hide_nav_buttons'] ) : ?>
 		<button
 			class="satori-post-carousel__btn satori-post-carousel__btn--prev"
 			aria-controls="<?php echo $track_id; // phpcs:ignore WordPress.Security.EscapeOutput ?>"
@@ -127,7 +127,7 @@ class Renderer {
 			</svg>
 		</button>
 		<?php endif; ?>
-			<?php if ( $attrs['show_dots'] ) : ?>
+			<?php if ( ! $attrs['hide_dots'] ) : ?>
 		<div
 			class="satori-post-carousel__dots"
 			role="tablist"
@@ -149,7 +149,7 @@ class Renderer {
 			<?php endforeach; ?>
 		</div>
 		<?php endif; ?>
-			<?php if ( $attrs['show_nav_buttons'] ) : ?>
+			<?php if ( ! $attrs['hide_nav_buttons'] ) : ?>
 		<button
 			class="satori-post-carousel__btn satori-post-carousel__btn--next"
 			aria-controls="<?php echo $track_id; // phpcs:ignore WordPress.Security.EscapeOutput ?>"
@@ -160,7 +160,7 @@ class Renderer {
 			</svg>
 		</button>
 		<?php endif; ?>
-			<?php if ( $attrs['show_pause_button'] ) : ?>
+			<?php if ( ! $attrs['hide_pause_button'] ) : ?>
 		<button
 			class="satori-post-carousel__btn satori-post-carousel__btn--pause"
 			aria-pressed="false"

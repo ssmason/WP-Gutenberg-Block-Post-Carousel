@@ -69,9 +69,9 @@ class Sanitizer {
 	 *     post_type: string,
 	 *     posts_per_page: int,
 	 *     autoplay_interval: int,
-	 *     show_dots: bool,
-	 *     show_nav_buttons: bool,
-	 *     show_pause_button: bool,
+	 *     hide_dots: bool,
+	 *     hide_nav_buttons: bool,
+	 *     hide_pause_button: bool,
 	 * }
 	 */
 	public static function sanitize( array $raw ): array {
@@ -85,9 +85,9 @@ class Sanitizer {
 			'autoplay_interval' => self::_sanitize_autoplay_interval(
 				$raw['autoplayInterval'] ?? 5
 			),
-			'show_dots'         => (bool) ( $raw['showDots'] ?? true ),
-			'show_nav_buttons'  => (bool) ( $raw['showNavButtons'] ?? true ),
-			'show_pause_button' => (bool) ( $raw['showPauseButton'] ?? true ),
+			'hide_dots'         => (bool) ( $raw['hideDots'] ?? false ),
+			'hide_nav_buttons'  => (bool) ( $raw['hideNavButtons'] ?? false ),
+			'hide_pause_button' => (bool) ( $raw['hidePauseButton'] ?? false ),
 		];
 	}
 
