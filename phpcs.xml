@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<ruleset name="Satori Post Carousel">
+    <description>PHPCS ruleset for the Satori Post Carousel plugin.</description>
+
+    <file>.</file>
+    <exclude-pattern>./build/*</exclude-pattern>
+    <exclude-pattern>./node_modules/*</exclude-pattern>
+    <exclude-pattern>./src/*</exclude-pattern>
+
+    <!-- WordPress coding standards (security, escaping, i18n, etc.) -->
+    <rule ref="WordPress" />
+
+    <!-- Short array syntax is allowed — this plugin targets PHP 8.2+ -->
+    <rule ref="Universal.Arrays.DisallowShortArraySyntax">
+        <exclude name="Universal.Arrays.DisallowShortArraySyntax.Found" />
+    </rule>
+
+    <!--
+        PEAR convention requires private methods/properties to be prefixed
+        with an underscore. PSR2 warns against this. PEAR takes precedence
+        here — suppress the conflicting PSR2 rules.
+    -->
+    <rule ref="PSR2.Methods.MethodDeclaration">
+        <exclude name="PSR2.Methods.MethodDeclaration.Underscore" />
+    </rule>
+    <rule ref="PSR2.Classes.PropertyDeclaration">
+        <exclude name="PSR2.Classes.PropertyDeclaration.Underscore" />
+    </rule>
+
+    <!-- Suppress reserved-keyword param name warning — $class_name is verbose -->
+    <rule ref="Universal.NamingConventions.NoReservedKeywordParameterNames">
+        <exclude
+            name="Universal.NamingConventions.NoReservedKeywordParameterNames.classFound"
+        />
+    </rule>
+
+    <!-- PEAR docblock requirements for class and function comments -->
+    <rule ref="PEAR.Commenting.ClassComment" />
+    <rule ref="PEAR.Commenting.FunctionComment" />
+
+    <!-- Line length: warn at 100 chars, no hard absolute limit -->
+    <rule ref="Generic.Files.LineLength">
+        <properties>
+            <property name="lineLimit" value="100" />
+            <property name="absoluteLineLimit" value="0" />
+        </properties>
+    </rule>
+
+    <!-- Scan PHP files only -->
+    <arg name="extensions" value="php" />
+    <arg name="colors" />
+    <arg value="sp" />
+</ruleset>

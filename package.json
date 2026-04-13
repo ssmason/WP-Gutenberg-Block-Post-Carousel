@@ -1,0 +1,17 @@
+{
+	"name": "satori-post-carousel",
+	"version": "1.0.0",
+	"description": "Accessible, configurable Gutenberg carousel block for any post type.",
+	"author": "Steve Mason <steve@satori.digital>",
+	"license": "GPL-2.0-or-later",
+	"scripts": {
+		"build": "wp-scripts build",
+		"start": "wp-scripts start",
+		"lint:js": "wp-scripts lint-js",
+		"lint:css": "wp-scripts lint-style",
+		"format": "wp-scripts format"
+	},
+	"devDependencies": {
+		"@wordpress/scripts": "^30.0.0"
+	}
+}

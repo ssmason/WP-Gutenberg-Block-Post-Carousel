@@ -1,0 +1,62 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "satori-digital/post-carousel",
+	"version": "1.0.0",
+	"title": "Post Carousel",
+	"category": "widgets",
+	"description": "An accessible, configurable carousel of posts from any public post type.",
+	"keywords": [ "carousel", "posts", "slider" ],
+	"textdomain": "satori-post-carousel",
+	"attributes": {
+		"postType": {
+			"type": "string",
+			"default": "post"
+		},
+		"postsPerPage": {
+			"type": "integer",
+			"default": 3,
+			"minimum": 1,
+			"maximum": 20
+		},
+		"autoplayInterval": {
+			"type": "integer",
+			"default": 5,
+			"minimum": 1,
+			"maximum": 30
+		},
+		"showDots": {
+			"type": "boolean",
+			"default": true
+		},
+		"showNavButtons": {
+			"type": "boolean",
+			"default": true
+		},
+		"showPauseButton": {
+			"type": "boolean",
+			"default": true
+		}
+	},
+	"supports": {
+		"html": false,
+		"align": [ "wide", "full" ],
+		"color": {
+			"background": true,
+			"text": true,
+			"link": true
+		},
+		"spacing": {
+			"padding": true,
+			"margin": [ "top", "bottom" ]
+		},
+		"typography": {
+			"fontSize": true,
+			"lineHeight": true
+		}
+	},
+	"editorScript": "file:./build/index.js",
+	"editorStyle": "file:./build/index.css",
+	"style": "file:./build/style-index.css",
+	"viewScript": "file:./build/view.js"
+}

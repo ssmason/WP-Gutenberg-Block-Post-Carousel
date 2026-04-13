@@ -1,0 +1,10 @@
+.satori-post-carousel {
+
+	/*
+	 * Force the template card visible in the editor.
+	 * Frontend JS does not run here.
+	 */
+	&__slide {
+		display: block !important;
+	}
+}
