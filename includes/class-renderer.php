@@ -245,6 +245,13 @@ class Renderer {
 		$template_blocks = self::_get_template_blocks( $block );
 
 		foreach ( $posts as $index => $post ) {
+			/*
+			 * Mirror core/post-template: set the global $post for each
+			 * queried post so that template tags (get_the_title, get_permalink,
+			 * etc.) resolve against the correct post, not the page being viewed.
+			 */
+			setup_postdata( $post );
+
 			$label = esc_attr(
 				sprintf(
 					/* translators: 1: current slide number, 2: total slides */
@@ -257,16 +264,6 @@ class Renderer {
 			$content = '';
 
 			if ( count( $template_blocks ) > 0 ) {
-				/*
-				 * The theme blanks all titles via a the_title filter.
-				 * Add a high-priority counter-filter scoped to this post's ID
-				 * so core/post-title resolves the correct title, then remove it.
-				 */
-				$title_fix = function ( string $t, int $id ) use ( $post ): string {
-					return (int) $id === (int) $post->ID ? $post->post_title : $t;
-				};
-				add_filter( 'the_title', $title_fix, 999, 2 );
-
 				foreach ( $template_blocks as $inner_block ) {
 					$content .= ( new WP_Block(
 						$inner_block->parsed_block,
@@ -276,8 +273,6 @@ class Renderer {
 						]
 					) )->render();
 				}
-
-				remove_filter( 'the_title', $title_fix, 999 );
 			} else {
 				$thumbnail = (string) get_the_post_thumbnail(
 					$post,
