@@ -13,10 +13,27 @@ import {
 
 import { usePostTypes } from './store/selectors';
 
-/* Default card template — featured image + title. User can add/remove/reorder blocks. */
+/*
+ * Default inner block template.
+ * core/query provides the query loop context that other plugins depend on.
+ * core/post-template iterates posts; its children define the card layout.
+ * inherit: false prevents the query from following URL pagination context.
+ */
 const TEMPLATE = [
-	[ 'core/post-featured-image', {} ],
-	[ 'core/post-title', { level: 3, isLink: true } ],
+	[
+		'core/query',
+		{ query: { postType: 'post', perPage: 3, inherit: false } },
+		[
+			[
+				'core/post-template',
+				{},
+				[
+					[ 'core/post-featured-image', {} ],
+					[ 'core/post-title', { level: 3, isLink: true } ],
+				],
+			],
+		],
+	],
 ];
 
 /*
@@ -45,7 +62,7 @@ export default function Edit( { attributes, setAttributes } ) {
 	} );
 
 	const innerBlocksProps = useInnerBlocksProps(
-		{ className: 'satori-post-carousel__slide' },
+		{ className: 'satori-post-carousel__track' },
 		{ template: TEMPLATE, templateLock: false }
 	);
 
@@ -128,9 +145,7 @@ export default function Edit( { attributes, setAttributes } ) {
 			</InspectorControls>
 
 			<div { ...blockProps }>
-				<div className="satori-post-carousel__track">
-					<article { ...innerBlocksProps } />
-				</div>
+				<div { ...innerBlocksProps } />
 			</div>
 		</>
 	);

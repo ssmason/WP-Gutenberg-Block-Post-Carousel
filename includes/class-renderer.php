@@ -187,6 +187,38 @@ class Renderer {
 	}
 
 	/**
+	 * Returns the card template blocks from inside a core/query > core/post-template
+	 * structure, falling back to direct inner blocks for blocks saved with the
+	 * legacy layout (no core/query wrapper).
+	 *
+	 * @param WP_Block $block The carousel block instance.
+	 *
+	 * @return WP_Block[] Flat array of template blocks.
+	 */
+	private static function _get_template_blocks( WP_Block $block ): array {
+		foreach ( $block->inner_blocks as $inner ) {
+			if ( 'core/query' === $inner->name ) {
+				foreach ( $inner->inner_blocks as $query_child ) {
+					if ( 'core/post-template' === $query_child->name ) {
+						$tpl = [];
+						foreach ( $query_child->inner_blocks as $tpl_block ) {
+							$tpl[] = $tpl_block;
+						}
+						return $tpl;
+					}
+				}
+			}
+		}
+
+		// Fallback: blocks saved before the core/query wrapper was introduced.
+		$tpl = [];
+		foreach ( $block->inner_blocks as $inner ) {
+			$tpl[] = $inner;
+		}
+		return $tpl;
+	}
+
+	/**
 	 * Renders each inner block with per-post context and returns slide data.
 	 *
 	 * Context-aware core blocks (core/post-title, core/post-featured-image,
@@ -209,7 +241,8 @@ class Renderer {
 		array $attrs,
 		WP_Block $block
 	): array {
-		$slides = [];
+		$slides          = [];
+		$template_blocks = self::_get_template_blocks( $block );
 
 		foreach ( $posts as $index => $post ) {
 			$label = esc_attr(
@@ -223,7 +256,7 @@ class Renderer {
 
 			$content = '';
 
-			if ( count( $block->inner_blocks ) > 0 ) {
+			if ( count( $template_blocks ) > 0 ) {
 				/*
 				 * The theme blanks all titles via a the_title filter.
 				 * Add a high-priority counter-filter scoped to this post's ID
@@ -234,7 +267,7 @@ class Renderer {
 				};
 				add_filter( 'the_title', $title_fix, 999, 2 );
 
-				foreach ( $block->inner_blocks as $inner_block ) {
+				foreach ( $template_blocks as $inner_block ) {
 					$content .= ( new WP_Block(
 						$inner_block->parsed_block,
 						[

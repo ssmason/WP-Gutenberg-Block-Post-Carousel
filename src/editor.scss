@@ -1,10 +1,7 @@
 .satori-post-carousel {
 
 	/*
-	 * Force the template card visible in the editor.
-	 * Frontend JS does not run here.
+	 * core/query renders its own live preview in the editor.
+	 * No slide-visibility overrides are needed here.
 	 */
-	&__slide {
-		display: block !important;
-	}
 }

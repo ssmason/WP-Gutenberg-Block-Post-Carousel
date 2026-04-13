@@ -13,6 +13,13 @@
     "require": {
         "php": ">=8.2"
     },
+    "require-dev": {
+		"wp-coding-standards/wpcs": "^3.0",
+		"phpcsstandards/phpcsutils": "^1.0",
+		"phpcsstandards/phpcsextra": "^1.0",
+		"dealerdirect/phpcodesniffer-composer-installer": "^1.0",
+		"yoast/phpunit-polyfills": "^2.0"
+    },
     "autoload": {
         "classmap": [
             "includes/"
@@ -20,5 +27,10 @@
     },
     "extra": {
         "installer-name": "satori-post-carousel"
+    },
+    "config": {
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        }
     }
 }
